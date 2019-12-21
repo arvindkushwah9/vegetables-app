@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableHighlight, Image, Alert,TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import Login from './Login';
-import Registration from './Registration';
 import Home from './Home';
 import Landing from './Landing';
 import { connect } from 'react-redux';

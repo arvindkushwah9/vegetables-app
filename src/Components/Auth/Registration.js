@@ -4,7 +4,9 @@ import { Actions } from 'react-native-router-flux';
 import Forgot from './Forgot';
 import Login from './Login';
 import axios from 'axios';
-import Home from './Home';
+import Home from '../Home';
+import { connect } from 'react-redux';
+import { signupUser } from '../../actions/auth';
 
 export class Registration extends Component {
   constructor(props){
@@ -13,6 +15,8 @@ export class Registration extends Component {
       email: '',
       password: '',
       password_confirmation: '',
+      first_name: '',
+      last_name: '',
     };
     this.registerUser = this.registerUser.bind(this);
     this.onRegistrationFail = this.onRegistrationFail.bind(this);
@@ -23,24 +27,7 @@ export class Registration extends Component {
   }
 
   registerUser() {
-    const { email, password, password_confirmation } = this.state;
-    const headers = {
-      'Content-Type': 'application/json'
-    }
-    var user = {user: {email: email, password: password, password_confirmation: password_confirmation}}
-    // this.setState({ error: '', loading: true });
-    axios.post("http://192.168.1.8:3000/api/v1/sign_up", user,
-      {
-        headers: headers
-    })
-    .then((response) => {
-      deviceStorage.saveKey("id_token", response.data.jwt);
-      this.props.newJWT(response.data.jwt);
-    })
-    .catch((error) => {
-      console.log(error);
-      this.onRegistrationFail();
-    });
+    this.props.signupUser(this.state)
   }
 
   onRegistrationFail() {
@@ -56,7 +43,7 @@ export class Registration extends Component {
   }
 
   render() {
-    const { email, password, password_confirmation, error, loading } = this.state;
+    const { email, password, password_confirmation, first_name, last_name, error, loading } = this.state;
     const { form, section, errorTextStyle } = styles;
     return (
      <View style={styles.container}>
@@ -64,7 +51,6 @@ export class Registration extends Component {
             <Text>Registration</Text>
         </TouchableHighlight>
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/nolan/64/000000/important-mail.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="Email"
               value={email}
@@ -72,9 +58,25 @@ export class Registration extends Component {
               underlineColorAndroid='transparent'
               onChangeText={(email) => this.setState({email})}/>
         </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+              placeholder="First Name"
+              value={first_name}
+              underlineColorAndroid='transparent'
+              onChangeText={(first_name) => this.setState({first_name})}/>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+              placeholder="Last Name"
+              value={last_name}
+              underlineColorAndroid='transparent'
+              onChangeText={(last_name) => this.setState({last_name})}/>
+        </View>
+
         
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/nolan/64/000000/forgot-password.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="Password"
               value={password}
@@ -84,7 +86,6 @@ export class Registration extends Component {
         </View>
 
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/nolan/64/000000/forgot-password.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="Password Confirmation"
               value={password_confirmation}
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     // backgroundColor: '#DCDCDC',
-    backgroundColor: '#006699',
+    backgroundColor: '#DCDCDC',
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',
@@ -154,11 +155,22 @@ const styles = StyleSheet.create({
     borderRadius:30,
   },
   loginButton: {
-    backgroundColor: "#FF4DFF",
+    backgroundColor: "#00b5ec",
   },
   loginText: {
     color: 'white',
   }
 });
 
-export default Registration;
+
+const mapStateToProps = state => {
+  return {
+    storeObject: state
+  }
+}
+mapDispatchToProps = dispatch => {
+  return {
+    signupUser: params => dispatch(signupUser(params)),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Registration)

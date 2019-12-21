@@ -9,6 +9,7 @@ export default class Interceptor {
         'Origin': '',
         'uid': this.uid,
         'Accept': 'application/json',
+        'User-Token': this.accessToken,
     }
 
 
@@ -51,6 +52,7 @@ export default class Interceptor {
         this.headers['token-type'] = null
         this.headers['expiry'] = null
         this.headers['uid'] = null
+        this.headers['User-Token'] = null
 
     }
 
@@ -61,6 +63,7 @@ export default class Interceptor {
         this.headers['token-type'] = params['token-type']
         this.headers['expiry'] = params.expiry
         this.headers['uid'] = params.uid
+        this.headers['User-Token'] = params['access-token']
 
 
         // console.log(this.headers)

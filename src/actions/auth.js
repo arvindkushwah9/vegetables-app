@@ -97,6 +97,75 @@ export const loginUser = (params) => {
   }
 }
 
+export const signupUser = (params) => {
+  url = `${LOCAL_URL}api/v1/sign_up`
+
+  return dispatch => {
+    dispatch({
+      type: 'LOAD_SPINNER',
+      payload: true
+    })
+    console.log("signupUser actions called")
+    fetch(url, {
+      method: 'POST',
+      headers: Interceptor.getHeaders(),
+      body: JSON.stringify({
+        user: {
+          email: params.email,
+          password: params.password,
+          password_confirmation: params.password_confirmation,
+          first_name: params.first_name,
+          last_name: params.last_name
+        }
+      }),
+    }).then(response => {
+      console.log(response)
+      if (response.status == 401) {
+        console.log('AUTHENTICATION ERROR!!', data)
+        showMessage({
+            message: 'FAILED',
+            description: response.message,
+            type: "danger",
+          });
+        dispatch({
+          type: 'LOGIN_FAILED',
+        })
+      } else {
+        response.json().then(data => {
+          //let parsed = JSON.parse(data);
+          if (data.status == 401) {
+            console.log('AUTHENTICATION ERROR!!2', data)
+            showMessage({
+                message: response.message,
+                description: data.data.errors[0],
+                type: "danger",
+              });
+            dispatch({
+              type: 'LOGIN_FAILED',
+            })
+          }
+          else {
+           console.log('SUCCESS!!')
+          showMessage({
+            message: "SUCCESS!",
+            description: data.message,
+            type: "success",
+          });
+          
+          dispatch({
+            type: 'SIGNUP_USER_SUCCESS',
+            payload: { data: data, response: response },
+            // history.push("/Home")
+          })
+          Actions.home();
+        }
+        })
+      }
+    })
+  }
+}
+
+
 export const logoutUser = ({ access_token, uid, client }) => {
   url = `${LOCAL_URL}api/v1/sign_out`
 

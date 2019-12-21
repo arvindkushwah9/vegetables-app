@@ -18,6 +18,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, errorFlag: true, password: '', spinner: false }
     case 'LOGIN_USER_SUCCESS':
       return { ...state, ...action.payload, ...INITIAL_STATE, isLoggedIn: true }
+    case 'SIGNUP_USER_SUCCESS':
+      return { ...state, ...action.payload, ...INITIAL_STATE, isLoggedIn: true }
     case 'LOAD_SPINNER':
       return { ...state, spinner: true }
     default:

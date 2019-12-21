@@ -3,12 +3,12 @@ import { View, Text, TextInput, TouchableHighlight, Image, Alert,TouchableOpacit
 import { Actions } from 'react-native-router-flux';
 import Forgot from './Forgot';
 import Registration from './Registration';
-import Home from './Home';
-import Root from './Root';
-import { getUser } from '../actions/index';
-import { loginUser } from '../actions/auth';
+import Home from '../Home';
+import Root from '../Root';
+import { getUser } from '../../actions/index';
+import { loginUser } from '../../actions/auth';
 import { connect } from 'react-redux';
-import { genericStyles } from '../Styles/genericStyles'
+import { genericStyles } from '../../Styles/genericStyles'
 
 
 export class Login extends Component {
@@ -66,7 +66,6 @@ export class Login extends Component {
             <Text>Login</Text>
         </TouchableHighlight>
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/nolan/64/000000/important-mail.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="Email"
               value={email}
@@ -76,7 +75,6 @@ export class Login extends Component {
         </View>
         
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://img.icons8.com/nolan/64/000000/forgot-password.png'}}/>
           <TextInput style={styles.inputs}
               placeholder="Password"
               value={password}

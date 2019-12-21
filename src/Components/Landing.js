@@ -33,7 +33,7 @@ export class Landing extends Component {
         <TouchableHighlight 
          style={[styles.buttonContainer, styles.loginButton]}
          onPress={() => Actions.register()}>
-          <Text style={styles.setting}>Go To Registration Page</Text>
+          <Text style={styles.loginText}>Go To Registration Page</Text>
         </TouchableHighlight>
         <TouchableHighlight
          style={[styles.buttonContainer, styles.loginButton]}
@@ -44,7 +44,7 @@ export class Landing extends Component {
             });
           }}
         >
-          <Text style={styles.setting}>Click me</Text>
+          <Text style={styles.loginText}>Click me</Text>
         </TouchableHighlight>
       </View>
    )
@@ -67,9 +67,12 @@ const styles = StyleSheet.create({
     borderRadius:30,
   },
   loginButton: {
-    backgroundColor: "#3366FF",
+    backgroundColor: "#00b5ec",
+    color: 'white',
   },
-  
+  loginText: {
+    color: 'white',
+  },
 });
 
 const mapStateToProps = state => {

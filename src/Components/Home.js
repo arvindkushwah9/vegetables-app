@@ -32,19 +32,19 @@ export class Home extends Component {
           <Text>Welcome to Home</Text>
         </TouchableHighlight>
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]}
-         onPress={() => Actions.login()}>
-          <Text style={styles.loginText}>Go To Services</Text>
+         onPress={() => Actions.VegetablesList()}>
+          <Text style={styles.loginText}>Go To Vegetables</Text>
         </TouchableHighlight>
         <TouchableHighlight 
          style={[styles.buttonContainer, styles.loginButton]}
          onPress={() => Actions.register()}>
-          <Text style={styles.setting}>Go To Dashboard</Text>
+          <Text style={styles.loginText}>Go To Dashboard</Text>
         </TouchableHighlight>
         <TouchableHighlight
          style={[styles.buttonContainer, styles.loginButton]}
           onPress={() => this.logout() }
         >
-          <Text style={styles.setting}>Logout</Text>
+          <Text style={styles.loginText}>Logout</Text>
         </TouchableHighlight>
       </View>
    )
@@ -67,8 +67,12 @@ const styles = StyleSheet.create({
     borderRadius:30,
   },
   loginButton: {
-    backgroundColor: "#3366FF",
+    backgroundColor: "#00b5ec",
+    color: 'white',
   },
+   loginText: {
+    color: 'white',
+  }
   
 });
 

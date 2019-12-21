@@ -10,8 +10,8 @@
 
 ## Set up the project
 
-1. `git clone https://github.com/arvindkushwah9/React-Native-Example.git`
-2. `cd React-Native-Example`
+1. `git clone https://github.com/arvindkushwah9/vegetables-app.git`
+2. `cd vegetables-app`
 3. `npx install`
 
 
